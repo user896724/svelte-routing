@@ -1,7 +1,7 @@
 {
 	"name": "@lightsquare/svelte-routing",
 	"private": false,
-	"version": "1.0.0",
+	"version": "1.1.2",
 	"description": "A declarative Svelte routing library with SSR support",
 	"main": "src/index.js",
 	"svelte": "src/index.js",

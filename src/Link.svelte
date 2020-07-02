@@ -28,12 +28,9 @@ $: props = {
 };
 
 function onClick(event) {
-	console.log("click");
-	console.log(e);
 	dispatch("click", event);
 
 	if (shouldNavigate(event)) {
-		console.log("pd");
 		event.preventDefault();
 		// Don't push another entry to the history stack when the user
 		// clicks on a Link to the page they are currently on.
@@ -50,7 +47,7 @@ function onClick(event) {
 		{...$$restProps}
 		on:click={onClick}
 	>
-		<slot/>asd
+		<slot/>
 	</svelte:component>
 {:else}
 	<a aria-current={ariaCurrent} on:click={onClick} {...props}>
