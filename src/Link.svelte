@@ -50,7 +50,7 @@ function onClick(event) {
 		<slot/>
 	</svelte:component>
 {:else}
-	<a aria-current={ariaCurrent} on:click={onClick} {...props}>
+	<a {href} aria-current={ariaCurrent} on:click={onClick}>
 		<slot></slot>
 	</a>
 {/if}
