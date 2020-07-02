@@ -1,2 +1,2 @@
-export const LOCATION = {};
-export const ROUTER = {};
+export let LOCATION = "svelte-routing-location";
+export let ROUTER = "svelte-routing-router";

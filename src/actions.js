@@ -11,26 +11,26 @@ import { shouldNavigate, hostMatches } from "./utils.js";
  * ```
  */
 function link(node) {
-  function onClick(event) {
-    const anchor = event.currentTarget;
+	function onClick(event) {
+		let anchor = event.currentTarget;
 
-    if (
-      anchor.target === "" &&
-      hostMatches(anchor) &&
-      shouldNavigate(event)
-    ) {
-      event.preventDefault();
-      navigate(anchor.pathname + anchor.search, { replace: anchor.hasAttribute("replace") });
-    }
-  }
+		if (
+			anchor.target === "" &&
+			hostMatches(anchor) &&
+			shouldNavigate(event)
+		) {
+			event.preventDefault();
+			navigate(anchor.pathname + anchor.search, { replace: anchor.hasAttribute("replace") });
+		}
+	}
 
-  node.addEventListener("click", onClick);
+	node.addEventListener("click", onClick);
 
-  return {
-    destroy() {
-      node.removeEventListener("click", onClick);
-    }
-  };
+	return {
+		destroy() {
+			node.removeEventListener("click", onClick);
+		}
+	};
 }
 
 /**
@@ -40,46 +40,46 @@ function link(node) {
  * Example:
  * ```html
  * <div use:links>
- *   <Router>
- *     <Route path="/" component={Home} />
- *     <Route path="/p/:projectId/:docId?" component={ProjectScreen} />
- *     {#each projects as project}
- *       <a href="/p/{project.id}">{project.title}</a>
- *     {/each}
- *   </Router>
+ *	 <Router>
+ *		 <Route path="/" component={Home} />
+ *		 <Route path="/p/:projectId/:docId?" component={ProjectScreen} />
+ *		 {#each projects as project}
+ *			 <a href="/p/{project.id}">{project.title}</a>
+ *		 {/each}
+ *	 </Router>
  * </div>
  * ```
  */
 function links(node) {
-  function findClosest(tagName, el) {
-    while (el && el.tagName !== tagName) {
-      el = el.parentNode;
-    }
-    return el;
-  }
+	function findClosest(tagName, el) {
+		while (el && el.tagName !== tagName) {
+			el = el.parentNode;
+		}
+		return el;
+	}
 
-  function onClick(event) {
-    const anchor = findClosest("A", event.target);
+	function onClick(event) {
+		let anchor = findClosest("A", event.target);
 
-    if (
-      anchor &&
-      anchor.target === "" &&
-      hostMatches(anchor) &&
-      shouldNavigate(event) &&
-      !anchor.hasAttribute("noroute")
-    ) {
-      event.preventDefault();
-      navigate(anchor.pathname + anchor.search, { replace: anchor.hasAttribute("replace") });
-    }
-  }
+		if (
+			anchor &&
+			anchor.target === "" &&
+			hostMatches(anchor) &&
+			shouldNavigate(event) &&
+			!anchor.hasAttribute("noroute")
+		) {
+			event.preventDefault();
+			navigate(anchor.pathname + anchor.search, { replace: anchor.hasAttribute("replace") });
+		}
+	}
 
-  node.addEventListener("click", onClick);
+	node.addEventListener("click", onClick);
 
-  return {
-    destroy() {
-      node.removeEventListener("click", onClick);
-    }
-  };
+	return {
+		destroy() {
+			node.removeEventListener("click", onClick);
+		}
+	};
 }
 
 export { link, links };

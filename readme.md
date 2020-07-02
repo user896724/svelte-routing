@@ -4,10 +4,6 @@
 
 A declarative Svelte routing library with SSR support.
 
-## Getting started
-
-Look at the [example folder][example-folder-url] for an example project setup.
-
 ## Install
 
 ```bash
@@ -19,26 +15,26 @@ npm install --save svelte-routing
 ```html
 <!-- App.svelte -->
 <script>
-  import { Router, Link, Route } from "svelte-routing";
-  import Home from "./routes/Home.svelte";
-  import About from "./routes/About.svelte";
-  import Blog from "./routes/Blog.svelte";
+	import { Router, Link, Route } from "svelte-routing";
+	import Home from "./routes/Home.svelte";
+	import About from "./routes/About.svelte";
+	import Blog from "./routes/Blog.svelte";
 
-  export let url = "";
+	export let url = "";
 </script>
 
 <Router url="{url}">
-  <nav>
-    <Link to="/">Home</Link>
-    <Link to="about">About</Link>
-    <Link to="blog">Blog</Link>
-  </nav>
-  <div>
-    <Route path="blog/:id" component="{BlogPost}" />
-    <Route path="blog" component="{Blog}" />
-    <Route path="about" component="{About}" />
-    <Route path="/"><Home /></Route>
-  </div>
+	<nav>
+		<Link to="/">Home</Link>
+		<Link to="about">About</Link>
+		<Link to="blog">Blog</Link>
+	</nav>
+	<div>
+		<Route path="blog/:id" component="{BlogPost}" />
+		<Route path="blog" component="{Blog}" />
+		<Route path="about" component="{About}" />
+		<Route path="/"><Home /></Route>
+	</div>
 </Router>
 ```
 
@@ -47,8 +43,8 @@ npm install --save svelte-routing
 import App from "./App.svelte";
 
 const app = new App({
-  target: document.getElementById("app"),
-  hydrate: true
+	target: document.getElementById("app"),
+	hydrate: true
 });
 ```
 
@@ -58,15 +54,15 @@ const { createServer } = require("http");
 const app = require("./dist/App.js");
 
 createServer((req, res) => {
-  const { html } = app.render({ url: req.url });
+	const { html } = app.render({ url: req.url });
 
-  res.write(`
-    <!DOCTYPE html>
-    <div id="app">${html}</div>
-    <script src="/dist/bundle.js"></script>
-  `);
+	res.write(`
+		<!DOCTYPE html>
+		<div id="app">${html}</div>
+		<script src="/dist/bundle.js"></script>
+	`);
 
-  res.end();
+	res.end();
 }).listen(3000);
 ```
 
@@ -93,7 +89,7 @@ A component used to navigate around the application.
 
 |  Property  | Required | Default Value | Description                                                                                                                                                                                                                                                                                                                                                                               |
 | :--------: | :------: | :-----------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|    `to`    |   ✔ ️    |     `'#'`     | URL the component should link to.                                                                                                                                                                                                                                                                                                                                                         |
+|    `to`    |   ✔ ️     |     `'#'`     | URL the component should link to.                                                                                                                                                                                                                                                                                                                                                         |
 | `replace`  |          |    `false`    | When `true`, clicking the `Link` will replace the current entry in the history stack instead of adding a new one.                                                                                                                                                                                                                                                                         |
 |  `state`   |          |     `{}`      | An object that will be pushed to the history stack when the `Link` is clicked.                                                                                                                                                                                                                                                                                                            |
 | `getProps` |          | `() => ({})`  | A function that returns an object that will be spread on the underlying anchor element's attributes. The first argument given to the function is an object with the properties `location`, `href`, `isPartiallyCurrent`, `isCurrent`. Look at the [`NavLink` component in the example project setup][example-folder-navlink] to see how you can build your own link components with this. |
@@ -110,7 +106,7 @@ Potential path parameters are passed back to the parent using props, so they can
 
 ```html
 <Route path="blog/:id" let:params>
-  <BlogPost id="{params.id}" />
+	<BlogPost id="{params.id}" />
 </Route>
 ```
 
@@ -129,13 +125,13 @@ The first argument is a string denoting where to navigate to, and the second arg
 
 ```html
 <script>
-  import { navigate } from "svelte-routing";
+	import { navigate } from "svelte-routing";
 
-  function onSubmit() {
-    login().then(() => {
-      navigate("/success", { replace: true });
-    });
-  }
+	function onSubmit() {
+		login().then(() => {
+			navigate("/success", { replace: true });
+		});
+	}
 </script>
 ```
 
@@ -145,13 +141,13 @@ An action used on anchor tags to navigate around the application. You can add an
 
 ```html
 <script>
-  import { link } from "svelte-routing";
+	import { link } from "svelte-routing";
 </script>
 
 <Router>
-  <a href="/" use:link>Home</a>
-  <a href="/replace" use:link replace>Replace this URL</a>
-  <!-- ... -->
+	<a href="/" use:link>Home</a>
+	<a href="/replace" use:link replace>Replace this URL</a>
+	<!-- ... -->
 </Router>
 ```
 
@@ -162,16 +158,16 @@ An action used on a root element to make all relative anchor elements navigate a
 ```html
 <!-- App.svelte -->
 <script>
-  import { links } from "svelte-routing";
+	import { links } from "svelte-routing";
 </script>
 
 <div use:links>
-  <Router>
-    <a href="/">Home</a>
-    <a href="/replace" replace>Replace this URL</a>
-    <a href="/native" noroute>Use the native action</a>
-    <!-- ... -->
-  </Router>
+	<Router>
+		<a href="/">Home</a>
+		<a href="/replace" replace>Replace this URL</a>
+		<a href="/native" noroute>Use the native action</a>
+		<!-- ... -->
+	</Router>
 </div>
 ```
 
